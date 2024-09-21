@@ -63,10 +63,10 @@ public class App extends Application {
     	log.info("Starting application...");
     	
     	//Verify IPA is intact
-    	PhonoSystem IPA = PhonoSystem.IPA;
-    	IPA.toFile();
-    	PhonoSystem IPAFile = new PhonoSystem(new File(System.getProperty("user.home") + "/Susquehanna/phonoSystems/IPA.phosys"));
-    	if (IPAFile.toString().equals(IPA.toString())) {
+    	PhonoSystem ipa = PhonoSystem.IPA;
+    	ipa.toFile();
+    	PhonoSystem ipaFile = new PhonoSystem(new File(System.getProperty("user.home") + "/Susquehanna/phonoSystems/IPA.phosys"));
+    	if (ipaFile.toString().equals(ipa.toString())) {
     		log.debug("IPA phonology system successfully verified!");
     	} else {
     		log.err("IPA phonology system could not be verified!");
@@ -168,9 +168,9 @@ public class App extends Application {
 	}
 	
 	public static void refreshType(String type) {
-		for (int i = 0; i < books.size(); i++) {
-			if (books.get(i).getID().startsWith(type)) {
-				books.get(i).refresh();
+		for (Book book : books) {
+			if (book.getID().startsWith(type)) {
+				book.refresh();
 			}
 		}
 	}
@@ -190,8 +190,8 @@ public class App extends Application {
     public static void setSelectedLang(Language l, File f) {
     	selectedLanguage = l;
     	currentFile = f;
-    	for (int i = 0; i < books.size(); i++) {
-    		books.get(i).updateOnLanguageChange();
+    	for (Book book : books) {
+    		book.updateOnLanguageChange();
     	}
     } 
     
